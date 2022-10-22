@@ -10,6 +10,6 @@ server.on('request', (req, res) => {
   res.end('Welcome to Node.js');
 });
 
-server.listen(PORT, () => { 
-  console.log(`Listening on port: ${PORT}`)
- });
+server.listen(PORT, () => {
+  console.log(`Listening on port: ${PORT}`);
+});
