@@ -1,20 +1,19 @@
-// Async Await w/ .promises instead of adding util module
+// Events module (on/emit)
 
-const { readFile, writeFile } = require('fs').promises;
+const EventEmitter = require('events');
 
-const getText = async (firsttxt, secondtxt) => {
-  try {
-    const first = await readFile(firsttxt, 'utf8');
-    const second = await readFile(secondtxt, 'utf-8');
-    console.log(first, second);
-    await writeFile(
-      './asyncpatterns/result-async-await-alt.txt',
-      `Here is the result of the async patterns (async-await): ${first}. ${second}. \n`,
-      { flag: 'a' }
-    );
-  } catch (err) {
-    console.log(err);
-  }
-};
+// Setup custom event handler
+const customEmitter = new EventEmitter();
 
-getText('./content/first.txt', './content/second.txt');
+// .on subscribes to the response event
+// Must listen for event first (.on) then .(emit)
+customEmitter.on('response', (name, age) => {
+  console.log(`data: {
+    name: ${name},
+    age: ${age},
+  }`);
+});
+
+// .emit fires off the response event
+// Accepts arguments
+customEmitter.emit('response', 'Derrick', 43);
